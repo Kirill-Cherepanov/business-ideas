@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from 'mongoose';
 
-import { Idea as IdeaInterface } from '@/types';
+import { Idea as IdeaInterface } from '@/types/custom';
 
 const IdeaSchema = new Schema({
   title: {

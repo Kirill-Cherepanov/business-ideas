@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from 'mongoose';
 
-import { User as UserInterface } from '@/types';
+import { User as UserInterface } from '@/types/custom';
 
 const UserSchema = new Schema({
   email: {

@@ -1,7 +1,7 @@
 'use server';
 
 import { Idea } from '@/database';
-import { TIdea } from '@/types';
+import { TIdea } from '@/types/custom';
 
 export async function createIdea(idea: TIdea) {
   'use server';

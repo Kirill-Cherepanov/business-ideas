@@ -1,9 +1,11 @@
-import { connectToDB } from '@/database';
 import type { Metadata } from 'next';
 
+import { Nav, Provider } from '@/components';
+import { connectToDB } from '@/database';
+
 export const metadata: Metadata = {
-  title: 'Task management app',
-  description: 'Task management app with Next.js 13, MUI and Storybook',
+  title: 'Business ideas sharing app',
+  description: 'An app to share your business ideas built with with Next.js 13, MUI and Storybook',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -11,7 +13,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Provider>
+          <Nav />
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }

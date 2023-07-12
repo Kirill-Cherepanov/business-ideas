@@ -2,7 +2,7 @@
 
 import { deleteIdea } from '@/functions/ideasFunctions';
 
-type IdeaItemProps = {
+type IdeaCardProps = {
   id: string;
   title: string;
   creator: string;
@@ -10,7 +10,7 @@ type IdeaItemProps = {
   tag: string;
 };
 
-export function IdeaItem({ id, title, creator, text, tag }: IdeaItemProps) {
+export function IdeaCard({ id, title, creator, text, tag }: IdeaCardProps) {
   return (
     <li>
       {/* <button onClick={() => editIdea(id, !complete)}>Edit</button> */}

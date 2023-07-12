@@ -1,6 +1,14 @@
 'use server';
 
 import { Idea } from '@/database';
+import { TIdea } from '@/types';
+
+export async function createIdea(idea: TIdea) {
+  'use server';
+
+  const newIdea = new Idea(idea);
+  await newIdea.save();
+}
 
 export async function getIdeas() {
   'use server';

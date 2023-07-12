@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Model, Schema, model, models } from 'mongoose';
 
 import { User as UserInterface } from '@/types';
 
@@ -21,4 +21,4 @@ const UserSchema = new Schema({
   },
 });
 
-export const User = model<UserInterface>('Category', UserSchema);
+export const User: Model<UserInterface> = models.User || model('User', UserSchema);

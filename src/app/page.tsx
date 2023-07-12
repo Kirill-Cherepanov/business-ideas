@@ -12,7 +12,7 @@ export default async function Home() {
         <h1>Ideas</h1>
       </header>
       <main>
-        <Link href="/new">New</Link>
+        <Link href="/create">Create</Link>
         <ul>
           {ideas.map((idea) => (
             <IdeaItem key={String(idea._id)} id={idea._id} {...idea} />

@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteIdea } from '@/functions/todoFunctions';
+import { deleteIdea } from '@/functions/ideasFunctions';
 
 type IdeaItemProps = {
   id: string;

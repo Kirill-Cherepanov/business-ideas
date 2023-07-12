@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Model, Schema, model, models } from 'mongoose';
 
 import { Idea as IdeaInterface } from '@/types';
 
@@ -21,4 +21,4 @@ const IdeaSchema = new Schema({
   },
 });
 
-export const Idea = model<IdeaInterface>('Category', IdeaSchema);
+export const Idea: Model<IdeaInterface> = models.Idea || model('Idea', IdeaSchema);

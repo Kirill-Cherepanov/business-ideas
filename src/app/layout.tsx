@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import { Nav, Provider } from '@/components';
-import { connectToDB } from '@/database';
 
 export const metadata: Metadata = {
   title: 'Business ideas sharing app',
@@ -9,8 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  connectToDB();
-
   return (
     <html lang="en">
       <body>

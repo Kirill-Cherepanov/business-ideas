@@ -3,7 +3,7 @@ import { Document, ObjectId } from 'mongoose';
 export type TUser = {
   email: string;
   username: string;
-  image: string;
+  picture: string;
 };
 
 export interface User extends Document, TUser {

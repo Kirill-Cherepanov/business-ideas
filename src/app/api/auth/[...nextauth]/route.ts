@@ -23,8 +23,9 @@ const handler = NextAuth({
     },
     async signIn({ profile }) {
       try {
-        if (!profile || !profile.name || !profile.image) {
+        if (!profile || !profile.name || !profile.picture) {
           console.error('No profile was sent or profile was incomplete!');
+          console.log(profile);
           return false;
         }
 
@@ -36,7 +37,7 @@ const handler = NextAuth({
         await User.create({
           email: profile.email,
           username: profile.name.replace(' ', '').toLowerCase(),
-          image: profile.image,
+          picture: profile.picture,
         });
         return true;
       } catch (error) {

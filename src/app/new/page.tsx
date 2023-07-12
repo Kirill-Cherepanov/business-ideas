@@ -1,4 +1,4 @@
-import { prisma } from '@/db';
+import { prisma } from '@/database';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 

@@ -1,21 +1,21 @@
-import { TodoItem } from '@/components/TodoItem';
-import { prisma } from '@/db';
 import Link from 'next/link';
-import { getTodos } from '@/functions/todoFunctions';
+
+import { IdeaItem } from '@/components';
+import { getIdeas } from '@/functions';
 
 export default async function Home() {
-  const todos = await getTodos();
+  const ideas = await getIdeas();
 
   return (
     <>
       <header>
-        <h1>Todos</h1>
+        <h1>Ideas</h1>
       </header>
       <main>
         <Link href="/new">New</Link>
         <ul>
-          {todos.map((todo) => (
-            <TodoItem key={todo.id} {...todo} />
+          {ideas.map((idea) => (
+            <IdeaItem key={String(idea._id)} id={idea._id} {...idea} />
           ))}
         </ul>
       </main>

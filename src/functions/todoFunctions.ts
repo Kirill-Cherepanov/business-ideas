@@ -1,21 +1,21 @@
 'use server';
 
-import { prisma } from '@/db';
+import { Idea } from '@/database';
 
-export async function getTodos() {
+export async function getIdeas() {
   'use server';
 
-  return prisma.todo.findMany();
+  return await Idea.find();
 }
 
-export async function toggleTodo(id: string, complete: boolean) {
+// export async function editIdea(id: string, complete: boolean) {
+//   'use server';
+
+//   const t = await Idea.updateMany({ id });
+// }
+
+export async function deleteIdea(id: string) {
   'use server';
 
-  await prisma.todo.update({ where: { id }, data: { complete } });
-}
-
-export async function deleteTodo(id: string) {
-  'use server';
-
-  await prisma.todo.delete({ where: { id } });
+  await Idea.findByIdAndDelete(id);
 }

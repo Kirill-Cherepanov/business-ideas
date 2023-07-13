@@ -8,6 +8,6 @@ type ProviderProps = {
   session?: Session;
 };
 
-export function Provider({ children, session }: ProviderProps) {
+export function AuthProvider({ children, session }: ProviderProps) {
   return <SessionProvider session={session}>{children}</SessionProvider>;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
-import { Nav, Provider } from '@/components';
+import { Nav } from '@/components';
+import { Provider } from '@/providers';
 
 export const metadata: Metadata = {
   title: 'Business ideas sharing app',

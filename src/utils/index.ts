@@ -1,1 +1,1 @@
-export * from './ideasFunctions';
+export * from './serverFunctions';

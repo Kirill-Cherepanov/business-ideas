@@ -17,3 +17,7 @@ export interface User extends Document, TUser {
     updatedAt: Date;
   };
 }
+
+export type FormattedUser = TUser & {
+  id: string;
+};

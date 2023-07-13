@@ -1,4 +1,5 @@
 import { Document, ObjectId } from 'mongoose';
+import { FormattedUser, User } from './user.types';
 
 export type TIdea = {
   title: string;
@@ -19,6 +20,14 @@ export interface Idea extends Document, TIdea {
   };
 }
 
-export type FormattedIdea = TIdea & {
+export interface PopulatedIdea extends Omit<Idea, 'creator'> {
+  creator: User;
+}
+
+export type FormattedIdea = {
   id: string;
+  title: string;
+  creator: FormattedUser;
+  text: string;
+  tag: string;
 };

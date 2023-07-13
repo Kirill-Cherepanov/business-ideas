@@ -20,7 +20,6 @@ export function IdeaCard({ id, title, creator, text, tag, refetch }: IdeaCardPro
 
   return (
     <li>
-      {/* <button onClick={() => editIdea(id, !complete)}>Edit</button> */}
       <Link href={`/edit?id=${id}`}>Edit</Link>
       <button onClick={deleteAndRefetch}>Delete</button>
       {title}

@@ -31,9 +31,10 @@ type FormProps = {
   type: string;
   initIdea?: TIdea | null;
   handleSubmit: handleSubmitType;
+  handleDelete?: () => void;
 };
 
-export function Form({ type, initIdea, handleSubmit }: FormProps) {
+export function Form({ type, initIdea, handleSubmit, handleDelete }: FormProps) {
   const [submitting, setSubmitting] = useState(false);
   const toggleSubmitting = () => setSubmitting((submitting) => !submitting);
 
@@ -62,6 +63,7 @@ export function Form({ type, initIdea, handleSubmit }: FormProps) {
 
       <div>
         <Link href="/">Cancel</Link>
+        {handleDelete && <button onClick={handleDelete}>Delete</button>}
         <button type="submit" disabled={submitting}>
           {type}
         </button>

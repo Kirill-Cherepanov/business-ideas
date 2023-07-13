@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 
 import { Form } from '@/components';
 import { TIdea } from '@/types/custom';
-import { editIdea, getIdea } from '@/utils';
+import { deleteIdea, editIdea, getIdea } from '@/utils';
 
 const UpdatePrompt = () => {
   const ideaId = useSearchParams().get('id');
@@ -13,6 +13,10 @@ const UpdatePrompt = () => {
   const [idea, setIdea] = useState<TIdea | null>(null);
 
   const formSumbitHandler = (idea: Omit<TIdea, 'creator'>) => editIdea(ideaId || '', idea);
+  const deleteHandler = () => {
+    deleteIdea(ideaId!);
+    redirect('..');
+  };
 
   useEffect(() => {
     async function getIdeaDetails() {
@@ -23,7 +27,16 @@ const UpdatePrompt = () => {
     getIdeaDetails();
   }, [ideaId]);
 
-  return <Form type="Edit" initIdea={idea} handleSubmit={formSumbitHandler} />;
+  if (!ideaId) return null;
+
+  return (
+    <Form
+      type="Edit"
+      initIdea={idea}
+      handleSubmit={formSumbitHandler}
+      handleDelete={deleteHandler}
+    />
+  );
 };
 
 export default UpdatePrompt;

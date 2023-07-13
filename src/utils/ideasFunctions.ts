@@ -1,22 +1,34 @@
 'use server';
 
-import { Idea, connectToDB } from '@/database';
+import { Idea, User, connectToDB } from '@/database';
 import { FormattedIdea, Idea as IdeaInterface, TIdea } from '@/types/custom';
-import { Session } from 'next-auth';
+import { getServerSession } from 'next-auth';
 
-export async function createIdea(idea: Omit<TIdea, 'creator'>, session: Session | null) {
+export async function getUser() {
+  const session = await getServerSession();
+
+  if (!session?.user.email) return;
+  const user = await User.findOne({ email: session.user.email });
+
+  return user;
+}
+
+export async function createIdea(idea: Omit<TIdea, 'creator'>) {
   'use server';
 
-  connectToDB();
+  await connectToDB();
 
-  const newIdea = new Idea(idea);
+  const user = await getUser();
+  if (!user) return;
+
+  const newIdea = new Idea({ ...idea, creator: user._id });
   await newIdea.save();
 }
 
 export async function getIdea(id: string) {
   'use server';
 
-  connectToDB();
+  await connectToDB();
 
   const idea = await Idea.findById(id);
   if (!idea) return idea;
@@ -26,22 +38,21 @@ export async function getIdea(id: string) {
 export async function getIdeas() {
   'use server';
 
-  connectToDB();
+  await connectToDB();
 
   const ideas = await Idea.find().limit(50);
   return ideas.map((idea) => formatIdea(idea));
 }
 
-export async function editIdea(
-  id: string,
-  edited: Omit<TIdea, 'creator'>,
-  session: Session | null
-) {
+export async function editIdea(id: string, edited: Omit<TIdea, 'creator'>) {
   'use server';
 
-  connectToDB();
+  await connectToDB();
 
-  const idea = await Idea.findById(id);
+  const user = await getUser();
+  if (!user) return;
+
+  const idea = await Idea.findOne({ _id: id, creator: user._id });
   if (!idea) return;
 
   idea.text = edited.text;
@@ -54,7 +65,13 @@ export async function editIdea(
 export async function deleteIdea(id: string) {
   'use server';
 
-  connectToDB();
+  await connectToDB();
+
+  const user = await getUser();
+  if (!user) return;
+
+  const idea = await Idea.findOne({ _id: id, creator: user._id });
+  if (!idea) return;
 
   await Idea.findByIdAndDelete(id);
 }

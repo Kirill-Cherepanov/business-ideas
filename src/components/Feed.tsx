@@ -16,6 +16,7 @@ export function Feed() {
     fetchIdeas();
   }, [fetchCounter]);
 
+  console.log(ideas);
   return (
     <>
       <ul>

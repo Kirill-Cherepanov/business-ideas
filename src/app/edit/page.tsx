@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 
 import { Form } from '@/components';
 import { TIdea } from '@/types/custom';
-import { editIdea, getIdea } from '@/functions';
+import { editIdea, getIdea } from '@/utils';
 import { getSession } from 'next-auth/react';
 
 async function formSumbitHandler_(id: string, idea: Omit<TIdea, 'creator'>) {

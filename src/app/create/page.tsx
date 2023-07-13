@@ -1,4 +1,4 @@
-import { createIdea } from '@/functions';
+import { createIdea } from '@/utils';
 import { getSession } from 'next-auth/react';
 import { Form } from '@/components';
 import { TIdea } from '@/types/custom';

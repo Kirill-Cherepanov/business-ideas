@@ -27,7 +27,7 @@ export function Nav() {
       <div>
         {session?.user ? (
           <div>
-            <Link href="/create-prompt">Create Post</Link>
+            <Link href="/create">Create Post</Link>
 
             <button type="button" onClick={() => signOut()}>
               Sign Out

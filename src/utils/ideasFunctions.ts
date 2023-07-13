@@ -1,7 +1,7 @@
 'use server';
 
 import { Idea, connectToDB } from '@/database';
-import { TIdea } from '@/types/custom';
+import { FormattedIdea, Idea as IdeaInterface, TIdea } from '@/types/custom';
 import { Session } from 'next-auth';
 
 export async function createIdea(idea: Omit<TIdea, 'creator'>, session: Session | null) {
@@ -18,7 +18,9 @@ export async function getIdea(id: string) {
 
   connectToDB();
 
-  return await Idea.findById(id);
+  const idea = await Idea.findById(id);
+  if (!idea) return idea;
+  return formatIdea(idea);
 }
 
 export async function getIdeas() {
@@ -26,7 +28,8 @@ export async function getIdeas() {
 
   connectToDB();
 
-  return await Idea.find().limit(50);
+  const ideas = await Idea.find().limit(50);
+  return ideas.map((idea) => formatIdea(idea));
 }
 
 export async function editIdea(
@@ -54,4 +57,14 @@ export async function deleteIdea(id: string) {
   connectToDB();
 
   await Idea.findByIdAndDelete(id);
+}
+
+function formatIdea(idea: IdeaInterface): FormattedIdea {
+  return {
+    id: String(idea._id),
+    title: idea.title,
+    creator: idea.creator,
+    text: idea.text,
+    tag: idea.tag,
+  };
 }

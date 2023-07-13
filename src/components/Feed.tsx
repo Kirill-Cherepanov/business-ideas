@@ -1,14 +1,27 @@
-import { getIdeas } from '@/functions';
-import { IdeaCard } from './IdeaCard';
+'use client';
 
-export async function Feed() {
-  const ideas = await getIdeas();
+import { getIdeas } from '@/utils';
+import { IdeaCard } from './IdeaCard';
+import { useEffect, useState } from 'react';
+import { FormattedIdea, Idea } from '@/types/custom';
+
+export function Feed() {
+  const [ideas, setIdeas] = useState<FormattedIdea[]>([]);
+
+  useEffect(() => {
+    async function fetchIdeas() {
+      const ideas = await getIdeas();
+      setIdeas(ideas);
+      console.log(ideas);
+    }
+    fetchIdeas();
+  }, []);
 
   return (
     <>
       <ul>
         {ideas.map((idea) => (
-          <IdeaCard key={String(idea._id)} id={idea._id} {...idea} />
+          <IdeaCard key={idea.id} {...idea} />
         ))}
       </ul>
     </>

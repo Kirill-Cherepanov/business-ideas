@@ -18,3 +18,7 @@ export interface Idea extends Document, TIdea {
     updatedAt: Date;
   };
 }
+
+export type FormattedIdea = TIdea & {
+  id: string;
+};

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Feed } from '@/components';
 
-export default async function Home() {
+export default function Home() {
   return (
     <main>
       <h1>Ideas</h1>

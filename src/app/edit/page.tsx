@@ -8,20 +8,15 @@ import { TIdea } from '@/types/custom';
 import { editIdea, getIdea } from '@/utils';
 import { getSession } from 'next-auth/react';
 
-async function formSumbitHandler_(id: string, idea: Omit<TIdea, 'creator'>) {
-  'use server';
-
+const formSumbitHandler = (id: string) => async (idea: Omit<TIdea, 'creator'>) => {
   const session = await getSession();
   editIdea(id, idea, session);
-}
+};
 
 const UpdatePrompt = () => {
   const ideaId = useSearchParams().get('id');
 
   const [idea, setIdea] = useState<TIdea | null>(null);
-
-  const formSumbitHandler = (idea: Omit<TIdea, 'creator'>) =>
-    formSumbitHandler_(ideaId || '', idea);
 
   useEffect(() => {
     async function getIdeaDetails() {
@@ -32,7 +27,7 @@ const UpdatePrompt = () => {
     getIdeaDetails();
   }, [ideaId]);
 
-  return <Form type="Edit" initIdea={idea} handleSubmit={formSumbitHandler} />;
+  return <Form type="Edit" initIdea={idea} handleSubmit={formSumbitHandler(ideaId || '')} />;
 };
 
 export default UpdatePrompt;

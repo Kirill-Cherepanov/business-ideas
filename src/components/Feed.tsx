@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { getIdeas } from '@/utils';
 import { IdeaCard } from './IdeaCard';
 import { FormattedIdea } from '@/types/custom';
+import { useRerender } from '@/hooks';
 
 export function Feed() {
-  const [fetchCounter, setFetchCounter] = useState(1);
+  const [fetchCounter, refetch] = useRerender();
   const [ideas, setIdeas] = useState<FormattedIdea[]>([]);
-  const refetch = () => setFetchCounter((counter) => counter + 1);
 
   useEffect(() => {
     const fetchIdeas = async () => setIdeas(await getIdeas());

@@ -1,7 +1,6 @@
 'use client';
 
 import { deleteIdea } from '@/utils/ideasFunctions';
-import { getSession } from 'next-auth/react';
 import Link from 'next/link';
 
 type IdeaCardProps = {

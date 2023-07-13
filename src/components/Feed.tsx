@@ -1,27 +1,26 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { getIdeas } from '@/utils';
 import { IdeaCard } from './IdeaCard';
-import { useEffect, useState } from 'react';
-import { FormattedIdea, Idea } from '@/types/custom';
+import { FormattedIdea } from '@/types/custom';
 
 export function Feed() {
+  const [fetchCounter, setFetchCounter] = useState(1);
   const [ideas, setIdeas] = useState<FormattedIdea[]>([]);
+  const refetch = () => setFetchCounter((counter) => counter + 1);
 
   useEffect(() => {
-    async function fetchIdeas() {
-      const ideas = await getIdeas();
-      setIdeas(ideas);
-      console.log(ideas);
-    }
+    const fetchIdeas = async () => setIdeas(await getIdeas());
     fetchIdeas();
-  }, []);
+  }, [fetchCounter]);
 
   return (
     <>
       <ul>
         {ideas.map((idea) => (
-          <IdeaCard key={idea.id} {...idea} />
+          <IdeaCard key={idea.id} refetch={refetch} {...idea} />
         ))}
       </ul>
     </>

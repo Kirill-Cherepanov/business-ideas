@@ -14,7 +14,7 @@ const handler = NextAuth({
   callbacks: {
     async session({ session }) {
       // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user?.email });
+      const sessionUser = await User.findOne({ email: session?.user?.email });
       if (!sessionUser) return session;
 
       session.user!.id = sessionUser._id.toString();
@@ -25,7 +25,7 @@ const handler = NextAuth({
       try {
         if (!profile || !profile.name || !profile.picture) {
           console.error('No profile was sent or profile was incomplete!');
-          console.log(profile);
+          console.error(profile);
           return false;
         }
 
@@ -41,7 +41,7 @@ const handler = NextAuth({
         });
         return true;
       } catch (error) {
-        console.log('Error checking if user exists: ', (error as { message: string }).message);
+        console.error('Error checking if user exists: ', (error as { message: string }).message);
         return false;
       }
     },

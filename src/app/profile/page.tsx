@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { Profile } from '@/components';
 import { useRerender } from '@/hooks';
-import { getIdeas } from '@/utils';
+import { getUserIdeas } from '@/utils';
 import { FormattedIdea } from '@/types/custom';
 
 const MyProfile = () => {
@@ -14,9 +14,11 @@ const MyProfile = () => {
   const [ideas, setIdeas] = useState<FormattedIdea[]>([]);
 
   useEffect(() => {
-    const fetchIdeas = async () => setIdeas(await getIdeas());
+    const fetchIdeas = async () => {
+      if (session?.user.id) setIdeas(await getUserIdeas(session?.user.id));
+    };
     fetchIdeas();
-  }, [fetchCounter]);
+  }, [fetchCounter, session?.user.id]);
 
   if (!session?.user) return null;
 

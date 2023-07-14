@@ -27,7 +27,7 @@ export function IdeaCard({ id, title, creator, text, tag, refetch }: IdeaCardPro
       <CardContent sx={{ padding: 1 }}>
         <Stack direction="row" spacing={1} alignItems={'center'} padding={0}>
           <Image src={creator.picture} width={30} height={30} alt="Profile picture" />
-          <Button component={Link} noLinkStyle href={`/profile?id=${creator.id}`}>
+          <Button component={Link} href={`/profile?id=${creator.id}`}>
             @{creator.username}
           </Button>
         </Stack>
@@ -42,7 +42,9 @@ export function IdeaCard({ id, title, creator, text, tag, refetch }: IdeaCardPro
       </CardContent>
 
       <CardActions>
-        <Link href={`/edit?id=${id}`}>Edit</Link>
+        <Button component={Link} href={`/edit?id=${id}`}>
+          Edit
+        </Button>
         <Button onClick={deleteAndRefetch}>Delete</Button>
       </CardActions>
     </Card>

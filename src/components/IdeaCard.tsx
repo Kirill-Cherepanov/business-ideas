@@ -23,7 +23,7 @@ export function IdeaCard({ id, title, creator, text, tag, refetch }: IdeaCardPro
   };
 
   return (
-    <Card sx={{ maxWidth: 300 }} component="li">
+    <Card>
       <CardContent sx={{ padding: 1 }}>
         <Stack direction="row" spacing={1} alignItems={'center'} padding={0}>
           <Image src={creator.picture} width={30} height={30} alt="Profile picture" />

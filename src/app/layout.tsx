@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
-import { Nav } from '@/components';
+import { Nav, Background } from '@/components';
 import { Provider } from '@/providers';
+
+import Container from '@mui/material/Container';
 
 export const metadata: Metadata = {
   title: 'Business ideas sharing app',
@@ -13,8 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Provider>
+          <Background />
           <Nav />
-          {children}
+          <Container sx={{ zIndex: 10, position: 'relative' }} maxWidth="lg">
+            {children}
+          </Container>
         </Provider>
       </body>
     </html>

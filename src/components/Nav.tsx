@@ -34,9 +34,8 @@ export function Nav() {
     }
     manageProviders();
   }, []);
-
   return (
-    <AppBar position="static">
+    <AppBar position="relative" sx={{ zIndex: 10 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -46,7 +45,7 @@ export function Nav() {
             component={Link}
             href="/"
             sx={{
-              mr: 2,
+              mr: 4,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
@@ -55,7 +54,7 @@ export function Nav() {
               textDecoration: 'none',
             }}
           >
-            Business ideas
+            Business Ideas
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -106,19 +105,18 @@ export function Nav() {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            Business ideas
+            Business Ideas
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               href="/create"
               component={Link}
               onClick={closeNav}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ ml: 'auto', mr: 4, color: 'white', display: 'block' }}
             >
               Create post
             </Button>
@@ -128,7 +126,9 @@ export function Nav() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={openUser} sx={{ p: 0 }}>
-                  <Avatar alt={session.user.username} src={session.user.image || ''} />
+                  <Avatar>
+                    <Image alt={session.user.username} src={session.user.image} fill />
+                  </Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
@@ -166,7 +166,13 @@ export function Nav() {
             </Box>
           ) : (
             Object.values(providers).map((provider) => (
-              <Button type="button" key={provider.name} onClick={() => signIn(provider.id)}>
+              <Button
+                variant="contained"
+                color="secondary"
+                type="button"
+                key={provider.name}
+                onClick={() => signIn(provider.id)}
+              >
                 Sign in
               </Button>
             ))
@@ -176,53 +182,3 @@ export function Nav() {
     </AppBar>
   );
 }
-
-// export function Nav() {
-//   const { data: session } = useSession();
-
-//   const [providers, setProviders] = useState<Object>([]);
-
-//   useEffect(() => {
-//     async function manageProviders() {
-//       const res = await getProviders();
-//       setProviders(res || {});
-//     }
-//     manageProviders();
-//   }, []);
-
-//   return (
-//     <nav>
-//       <Link href="/">
-//         <p className="logo_text">Business Mania</p>
-//       </Link>
-
-//       <div>
-//         {session?.user ? (
-//           <div>
-//             <Link href="/create">Create Post</Link>
-
-//             <button type="button" onClick={() => signOut()}>
-//               Sign Out
-//             </button>
-
-//             <Link href="/profile">
-//               <Image src={session.user.image || ''} width={37} height={37} alt="profile" />
-//             </Link>
-//           </div>
-//         ) : (
-//           Object.values(providers).map((provider) => (
-//             <button
-//               type="button"
-//               key={provider.name}
-//               onClick={() => {
-//                 signIn(provider.id);
-//               }}
-//             >
-//               Sign in
-//             </button>
-//           ))
-//         )}
-//       </div>
-//     </nav>
-//   );
-// }

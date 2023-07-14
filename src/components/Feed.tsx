@@ -6,6 +6,7 @@ import { getIdeas } from '@/utils';
 import { IdeaCard } from './IdeaCard';
 import { FormattedIdea } from '@/types/custom';
 import { useRerender } from '@/hooks';
+import Masonry from '@mui/lab/Masonry';
 
 export function Feed() {
   const [fetchCounter, refetch] = useRerender();
@@ -18,11 +19,11 @@ export function Feed() {
 
   return (
     <>
-      <ul>
+      <Masonry spacing={3}>
         {ideas.map((idea) => (
           <IdeaCard key={idea.id} refetch={refetch} {...idea} />
         ))}
-      </ul>
+      </Masonry>
     </>
   );
 }

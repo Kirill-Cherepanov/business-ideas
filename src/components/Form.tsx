@@ -2,8 +2,14 @@
 
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { TIdea } from '@/types/custom';
+import { FormattedIdea, TIdea } from '@/types/custom';
 import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { useTheme } from '@mui/material';
 
 type handleSubmitType = (idea: Omit<TIdea, 'creator'>) => Promise<TIdea | void>;
 
@@ -29,7 +35,7 @@ async function validateForm(
 
 type FormProps = {
   type: string;
-  initIdea?: TIdea | null;
+  initIdea?: FormattedIdea | null;
   handleSubmit: handleSubmitType;
   handleDelete?: () => void;
 };
@@ -38,36 +44,60 @@ export function Form({ type, initIdea, handleSubmit, handleDelete }: FormProps) 
   const [submitting, setSubmitting] = useState(false);
   const toggleSubmitting = () => setSubmitting((submitting) => !submitting);
 
-  return (
-    <form action={(data) => validateForm(data, handleSubmit, toggleSubmitting)}>
-      <label>
-        <span>Title</span>
-        <input type="text" name="title" id="title" defaultValue={initIdea?.title} />
-      </label>
+  const theme = useTheme();
 
-      <label>
-        <span>Your idea</span>
-        <textarea
+  return (
+    <Box component="form" action={(data) => validateForm(data, handleSubmit, toggleSubmitting)}>
+      <Stack spacing={2} marginBottom={2}>
+        <TextField
+          name="title"
+          id="title"
+          defaultValue={initIdea?.title}
+          label="Title"
+          InputLabelProps={{ shrink: true }}
+        />
+
+        <TextField
+          label="Your idea"
+          multiline
           defaultValue={initIdea?.text}
           placeholder="Write your idea here"
           name="text"
           id="text"
           required
+          minRows={4}
+          InputLabelProps={{ shrink: true }}
         />
-      </label>
 
-      <label>
-        <span>Tag</span>
-        <input type="text" name="tag" id="tag" defaultValue={initIdea?.tag} />
-      </label>
+        <TextField
+          name="tag"
+          id="tag"
+          defaultValue={initIdea?.tag}
+          label="Tag"
+          InputLabelProps={{ shrink: true }}
+        />
+      </Stack>
 
-      <div>
-        <Link href="/">Cancel</Link>
-        {handleDelete && <button onClick={handleDelete}>Delete</button>}
-        <button type="submit" disabled={submitting}>
+      <ButtonGroup
+        variant="outlined"
+        aria-label="outlined primary button group"
+        sx={{ width: 'max-content', justifyContent: 'center', display: 'flex', gap: 2 }}
+      >
+        {/* <Button>Buy</Button>
+        <Button>Learn</Button> */}
+
+        <Button component={Link} href="/" sx={{ color: theme.palette.custom.pink }}>
+          Cancel
+        </Button>
+        {handleDelete && (
+          <Button onClick={handleDelete} sx={{ color: theme.palette.custom.pink }}>
+            Delete
+          </Button>
+        )}
+        <Button type="submit" disabled={submitting} sx={{ color: theme.palette.custom.pink }}>
           {type}
-        </button>
-      </div>
-    </form>
+        </Button>
+      </ButtonGroup>
+    </Box>
   );
 }

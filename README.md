@@ -65,9 +65,9 @@ The Business Ideas Sharing App is built using the following technologies:
 
 If you have any questions, suggestions, or feedback, feel free to contact the project maintainer:
 
-Kirill Cherepanov
-cherkirr@gmail.com
-https://linkedin.com/in/kirill-cherepanov/
+- Kirill Cherepanov
+- cherkirr@gmail.com
+- https://linkedin.com/in/kirill-cherepanov/
 
 Happy idea sharing! 🚀
 

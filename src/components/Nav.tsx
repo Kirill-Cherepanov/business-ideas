@@ -34,8 +34,9 @@ export function Nav() {
     }
     manageProviders();
   }, []);
+
   return (
-    <AppBar position="relative" sx={{ zIndex: 10 }}>
+    <AppBar color="secondary" position="relative" sx={{ zIndex: 10 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -111,59 +112,53 @@ export function Nav() {
           >
             Business Ideas
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              href="/create"
-              component={Link}
-              onClick={closeNav}
-              sx={{ ml: 'auto', mr: 4, color: 'white', display: 'block' }}
-            >
-              Create post
-            </Button>
-          </Box>
 
           {session?.user ? (
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={openUser} sx={{ p: 0 }}>
-                  <Avatar>
-                    <Image alt={session.user.username} src={session.user.image} fill />
-                  </Avatar>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={elUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={!!elUser}
-                onClose={closeUser}
-              >
-                <MenuItem onClick={closeUser}>
-                  <Typography variant="button" component={Link} href="/profile" textAlign="center">
+            <>
+              <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Button
+                  href="/create"
+                  component={Link}
+                  onClick={closeNav}
+                  color="inherit"
+                  sx={{ ml: 'auto', mr: 4 }}
+                >
+                  Create post
+                </Button>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={openUser} sx={{ p: 0 }}>
+                    <Avatar>
+                      <Image alt={session.user.username} src={session.user.image} fill />
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={elUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={!!elUser}
+                  onClose={closeUser}
+                >
+                  <MenuItem onClick={closeUser} component={Link} href="/profile" noLinkStyle>
                     Profile
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={closeUser}>
-                  <Typography
-                    variant="button"
-                    component="button"
-                    onClick={() => signOut()}
-                    textAlign="center"
-                  >
-                    Logout
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
+                  </MenuItem>
+                  <MenuItem component="button" onClick={() => !!signOut() && closeUser()}>
+                    Sign out
+                  </MenuItem>
+                </Menu>
+              </Box>
+            </>
           ) : (
             Object.values(providers).map((provider) => (
               <Button
@@ -172,6 +167,7 @@ export function Nav() {
                 type="button"
                 key={provider.name}
                 onClick={() => signIn(provider.id)}
+                sx={{ ml: 'auto', mr: 4 }}
               >
                 Sign in
               </Button>

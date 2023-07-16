@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 export default function Home() {
   return (
     <main>
-      <Box marginY={8}>
+      <Box marginTop={8} marginBottom={4}>
         <Typography variant="h3" textAlign="center" fontWeight="900" component="h2">
           Discover & Share
         </Typography>
@@ -18,7 +18,7 @@ export default function Home() {
             fontWeight: '900',
           }}
         >
-          Multi-million dollar ideas
+          Multi-billion dollar ideas
         </Typography>
         <Typography
           marginTop={1}

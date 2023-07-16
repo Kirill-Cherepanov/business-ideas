@@ -6,29 +6,30 @@ import { Profile } from '@/components';
 import { useRerender } from '@/hooks';
 import { getUserIdeas } from '@/utils';
 import { FormattedIdea } from '@/types/custom';
-import { useSearchParams } from 'next/navigation';
 
-const UserProfile = () => {
-  const userId = useSearchParams().get('id');
+type UserProfileProps = { params: { id: string } };
+
+const UserProfile = ({ params: { id } }: UserProfileProps) => {
   const [fetchCounter, refetch] = useRerender();
   const [ideas, setIdeas] = useState<FormattedIdea[]>([]);
   const username = ideas[0] ? ideas[0].creator.username : '';
 
   useEffect(() => {
     const fetchIdeas = async () => {
-      if (userId) setIdeas(await getUserIdeas(userId));
+      if (id) setIdeas(await getUserIdeas(id));
     };
     fetchIdeas();
-  }, [fetchCounter, userId]);
+  }, [fetchCounter, id]);
 
-  if (!userId) return null;
+  if (!id) return null;
 
   return (
     <Profile
       name={username}
-      desc={`Welcome to ${username}'s personalized profile page. Explore ${username}'s exceptional prompts and be inspired by the power of their imagination`}
+      desc={`Welcome to ${username}'s personalized profile page. Explore ${username}'s exceptional ideas and be inspired by the power of their imagination`}
       ideas={ideas}
       refetch={refetch}
+      picture={ideas[0]?.creator.picture || ''}
     />
   );
 };

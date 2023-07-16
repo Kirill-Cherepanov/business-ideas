@@ -24,9 +24,10 @@ const MyProfile = () => {
 
   return (
     <Profile
-      name={session.user.name}
+      name="My"
       desc="Welcome to your personalized profile page. Share your exceptional 
-            prompts and inspire others with the power of your imagination"
+            ideas and inspire others with the power of your imagination"
+      picture={session.user.image}
       ideas={ideas}
       refetch={refetch}
     />

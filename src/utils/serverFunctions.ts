@@ -53,6 +53,22 @@ export async function getUserIdeas(userId: string) {
   return ideas.map((idea) => formatIdea(idea));
 }
 
+export async function searchIdeas(searchText: string) {
+  await connectToDB();
+
+  const ideas = (await Idea.find({
+    $or: [
+      { title: { $regex: searchText, $options: 'i' } },
+      { text: { $regex: searchText, $options: 'i' } },
+      { tag: { $regex: searchText, $options: 'i' } },
+    ],
+  })
+    .limit(50)
+    .populate('creator')) as PopulatedIdea[];
+
+  return ideas.map((idea) => formatIdea(idea));
+}
+
 export async function editIdea(id: string, edited: Omit<TIdea, 'creator'>) {
   await connectToDB();
 

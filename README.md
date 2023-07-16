@@ -4,7 +4,7 @@ The Business Ideas Sharing App is a simple and user-friendly platform that allow
 
 **Live Deployment:** [https://business-ideas.vercel.app](https://business-ideas.vercel.app)
 
-![App Screenshot](/screenshot.png)
+![image](https://github.com/Kirill-Cherepanov/business-ideas/assets/52123816/31486068-82bd-4e2e-926b-a03b885bd4c0)
 
 ## Key Features
 

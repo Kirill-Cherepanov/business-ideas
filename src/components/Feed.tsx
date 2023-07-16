@@ -59,7 +59,7 @@ export function Feed() {
         />
       </Box>
 
-      <Masonry spacing={3} columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} sx={{ margin: 0 }}>
+      <Masonry spacing={3} columns={{ xs: 1, sm: 2, md: 3 }} sx={{ margin: 0 }}>
         {ideas.map((idea) => (
           <IdeaCard key={idea.id} refetch={refetch} handleTagSearch={handleTagSearch} {...idea} />
         ))}

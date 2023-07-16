@@ -1,1 +1,1 @@
-Alright, I kinda gave up right after the beginning, realizing that the idea for this project is waaay too basic for me to use such a heavy stack on it (Next.js + MUI + Storybook)
+It was a basic todo app at first, but I realized that it was too heavy for the stack I wanted to practice with (Next.js + MUI + Storybook), so I decided to make an app where you can share business ideas. It's kinda small, but it's alright for practice, I think. I'll make a better readme after finishing the work on the project, by the way

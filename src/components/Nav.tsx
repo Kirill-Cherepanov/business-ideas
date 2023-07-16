@@ -17,7 +17,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import { useMenuDisclosure } from '@/hooks';
 import Link from './Link';
 
@@ -39,7 +39,7 @@ export function Nav() {
     <AppBar color="secondary" position="relative" sx={{ zIndex: 10 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <TipsAndUpdatesIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: '#fff' }} />
           <Typography
             variant="h6"
             noWrap
@@ -95,7 +95,7 @@ export function Nav() {
             </Box>
           )}
 
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <TipsAndUpdatesIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: '#fff' }} />
           <Typography
             variant="h5"
             noWrap

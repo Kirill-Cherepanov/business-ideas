@@ -28,11 +28,11 @@ export function Profile({ name, desc, ideas, picture, refetch }: ProfileProps) {
             background: 'linear-gradient(to right,#096a90, #0de6d4)',
             backgroundClip: 'text',
             color: 'transparent',
-            textAlign: 'center',
             fontWeight: '900',
           }}
         >
-          {name} profile
+          <span style={{ wordBreak: 'break-word' }}>{name} </span>
+          profile
         </Typography>
       </Stack>
 

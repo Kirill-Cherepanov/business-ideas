@@ -58,42 +58,43 @@ export function Nav() {
             Business Ideas
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={openNav}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={elNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={!!elNav}
-              onClose={closeNav}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              <MenuItem onClick={closeNav}>
-                <Typography textAlign="center" href="/create" component={Link}>
+          {session?.user && (
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={openNav}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={elNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={!!elNav}
+                onClose={closeNav}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <MenuItem onClick={closeNav} component={Link} href="/create" textAlign="center">
                   Create Post
-                </Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -167,7 +168,7 @@ export function Nav() {
                 type="button"
                 key={provider.name}
                 onClick={() => signIn(provider.id)}
-                sx={{ ml: 'auto', mr: 4 }}
+                sx={{ ml: 'auto' }}
               >
                 Sign in
               </Button>

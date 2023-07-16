@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Loading = () => {
   return (
-    <Box width="100%" display="flex" alignItems="center" alignContent="center">
+    <Box width="100vw" display="flex" alignItems="center" justifyContent="center">
       <Image
         src="/assets/icons/loader.svg"
         width={100}
